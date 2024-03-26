@@ -1,0 +1,19 @@
+<div class="container">
+    <h1>Welcome to our App</h1>
+    <div class="login-signup-buttons">
+        <!-- <button nbButton status="primary" ><a [routerLink]="['home', 'login']">Login</a></button>
+        <button nbButton status="primary" ><a [routerLink]="['home', 'signup']">Signup</a></button>
+        <button nbButton status="primary" ><a [routerLink]="['home', 'logout']">Logout</a></button> -->
+        <!-- home.component.html -->
+        <div *ngIf="!authService.isLoggedIn()">
+            <!-- Your login form -->
+            <button [routerLink]="['/home/login']">Login</button>
+            <button [routerLink]="['home/signup']">Signup</button>
+        </div>
+        <div *ngIf="authService.isLoggedIn()">
+            <app-logout></app-logout>
+            <!-- <button [routerLink]="['/home/logout']">Logout</button> -->
+        </div>
+
+    </div>
+</div>
