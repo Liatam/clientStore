@@ -9,6 +9,8 @@ import { Router } from '@angular/router'; // Import Router
 })
 export class LoginComponent {
   credentials = { username: '', password: '' };
+  showErrorAlert: boolean = false;
+  errorMessage: string = '';
 
   constructor(
     private authService: AuthService,
@@ -19,18 +21,19 @@ export class LoginComponent {
     this.authService.login(this.credentials).subscribe(
       {
         next: (response) => {
-          console.log("response", response)
-          // Handle successful login, e.g., store token in localStorage
-          console.log('Login successful. Token:', response.token);
-          console.log('Login successful. id user:', response.userId);
-          this.authService.storeToken(response.token); // Store token in AuthService
+          this.authService.storeToken(response.token); 
           this.authService.storeId(response.userId);
-          // Navigate to 'products' page
           this.router.navigate(['/products']);
         },
         error: error => {
-          console.error('Login failed:', error);
+          this.showErrorAlert = true;
+          this.errorMessage = error.error; 
         }
       });
+  }
+
+  hideErrorAlert() {
+    this.showErrorAlert = false;
+    this.errorMessage = '';
   }
 }

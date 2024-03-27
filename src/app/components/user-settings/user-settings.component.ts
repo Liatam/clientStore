@@ -9,11 +9,10 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./user-settings.component.css']
 })
 export class UserSettingsComponent implements OnInit {
-  updateUserRequest: User = {
-    id: '',
+  updateUserRequest = {
+    id:'',
     username: '',
-    password: ''
-    // Add more properties as needed for updating user information
+    email: ''
   };
 
   constructor(
@@ -25,7 +24,7 @@ export class UserSettingsComponent implements OnInit {
   ngOnInit(): void {
     const id = localStorage.getItem("userId")!;
     this.authService.getUser(id).subscribe({
-      next: (user) => {
+      next: (user:any) => {
         this.updateUserRequest = user;
       },
       error: (error) => {

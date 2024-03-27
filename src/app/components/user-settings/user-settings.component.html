@@ -3,17 +3,17 @@
     <div class="row">
       <div class="col-6">
         <form #form="ngForm" (ngSubmit)="updateUser()">
-          <div class="mb-3">
+          <!-- <div class="mb-3">
             <label for="id" class="form-label">Id</label>
             <input type="text" class="form-control bg-light" id="id" name="id" readonly [(ngModel)]="updateUserRequest.id" />
-          </div>
+          </div> -->
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
             <input type="text" class="form-control" id="name" name="name" [(ngModel)]="updateUserRequest.username" />
           </div>
           <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input type="text" class="form-control" id="password" name="password" [(ngModel)]="updateUserRequest.password" />
+            <label for="email" class="form-label">Email</label>
+            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="updateUserRequest.email" />
           </div>
           <!-- Add more fields as needed for updating user information -->
           <button type="submit" class="btn btn-primary">Update</button>

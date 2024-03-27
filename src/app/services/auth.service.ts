@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient , HttpHeaders} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user.model';
+import { map, catchError } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -42,12 +43,31 @@ export class AuthService {
   isLoggedIn(): boolean {
     return localStorage.getItem('token') !== null;
   }
- 
-  updateUser(id: string, updateUserRequest: User): Observable<User> {
-    return this.http.put<User>(this.apiUrl+"/users/"+id, updateUserRequest, { headers: this.getHeaders() });
+
+  isAdmin(): Observable<boolean> {
+    const userId = localStorage.getItem('userId');
+    if (userId) {
+      return this.getUser(userId).pipe(
+        map(user => {
+          return user.role === 'admin';
+        }),
+        catchError(error => {
+          console.error('Failed to fetch user data:', error);
+          return of(false);
+        })
+      );
+    } else {
+      return of(false);
+    }
+  }
+  
+
+  updateUser(id: string, updateUserRequest: any): Observable<any> {
+    return this.http.put<User>(this.apiUrl + "/users/" + id, updateUserRequest, { headers: this.getHeaders() });
   }
 
   getUser(id: string): Observable<User> {
-    return this.http.get<User>(this.apiUrl+"/users/"+id, { headers: this.getHeaders() });
+    return this.http.get<User>(this.apiUrl + "/users/" + id, { headers: this.getHeaders() });
   }
+
 }

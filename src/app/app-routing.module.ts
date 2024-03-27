@@ -9,6 +9,7 @@ import { SignupComponent } from './components/signup/signup.component';
 import { IsAuthGuard } from './services/auth.guard';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { AdminAuthGuard } from './services/admin-auth.guard';
 
 const routes: Routes = [
   // {
@@ -22,7 +23,7 @@ const routes: Routes = [
   {
     path: 'products/add',
     component: AddProductComponent,
-    canActivate: [IsAuthGuard] 
+    canActivate: [AdminAuthGuard] 
   },
   {
     path: 'products/edit/:id',

@@ -8,7 +8,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  userInfo = { username: '', password: '' };
+  userInfo = { username: '', password: '', email:'', role:"user"};
   showSuccessAlert: boolean = false;
   showErrorAlert: boolean = false;
   errorMessage: string = '';
@@ -25,7 +25,6 @@ export class SignupComponent {
     }
     this.authService.signup(this.userInfo).subscribe(
       response => {
-        console.log('success: ', response.message);
         this.showErrorAlert = false;
         this.showSuccessAlert = true;
         // Redirect after 2 seconds
