@@ -6,7 +6,7 @@ import { EditProductComponent } from './components/edit-product/edit-product.com
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
-import { AuthGuard } from './services/auth.guard';
+import { IsAuthGuard } from './services/auth.guard';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 
@@ -18,17 +18,16 @@ const routes: Routes = [
   {
     path: 'products',
     component: ProductsComponent,
-    canActivate: [AuthGuard] 
   },
   {
     path: 'products/add',
     component: AddProductComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [IsAuthGuard] 
   },
   {
     path: 'products/edit/:id',
     component: EditProductComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [IsAuthGuard] 
   },
   {
     path: '',
@@ -49,7 +48,7 @@ const routes: Routes = [
   {
     path: 'home/settings',
     component: UserSettingsComponent,
-    canActivate: [AuthGuard] 
+    canActivate: [IsAuthGuard] 
   },
   
   { path: '**', redirectTo: '' }

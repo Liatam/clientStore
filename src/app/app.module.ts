@@ -14,6 +14,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthService } from './services/auth.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { UserSettingsComponent } from './components/user-settings/user-settings.
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgToastModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
