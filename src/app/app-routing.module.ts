@@ -11,6 +11,7 @@ import { LogoutComponent } from './components/logout/logout.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { AdminAuthGuard } from './services/admin-auth.guard';
 import { AdminComponent } from './components/admin/admin.component';
+import { CartComponent } from './components/cart/cart.component';
 
 const routes: Routes = [
   // {
@@ -55,6 +56,12 @@ const routes: Routes = [
   {
     path: 'home/settings',
     component: UserSettingsComponent,
+    canActivate: [IsAuthGuard] 
+  },
+
+  {
+    path:'cart',
+    component: CartComponent,
     canActivate: [IsAuthGuard] 
   },
   

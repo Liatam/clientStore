@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../models/product.model';
 import { ProductsService } from '../../services/products.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -15,7 +16,8 @@ export class ProductsComponent implements OnInit {
   products: any[] = [];
   constructor(
     private productService: ProductsService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
     ) { }
 
   // getProducts(): void {
@@ -78,6 +80,10 @@ export class ProductsComponent implements OnInit {
           });
       }
     });
+  }
+
+  addToCart(product: any): void {
+    this.cartService.addToCart(product);
   }
 
 

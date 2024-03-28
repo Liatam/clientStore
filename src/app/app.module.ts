@@ -15,6 +15,8 @@ import { AuthService } from './services/auth.service';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { NgToastModule } from 'ng-angular-popup';
+import { AdminComponent } from './components/admin/admin.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { NgToastModule } from 'ng-angular-popup';
     SignupComponent,
     LogoutComponent,
     HomeComponent,
-    UserSettingsComponent
+    UserSettingsComponent,  
+    AdminComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
