@@ -13,7 +13,6 @@ export class ProductsService {
 
   constructor(private http: HttpClient) { }
 
-  // Helper function to create HttpHeaders with the Authorization header
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Authorization': `Bearer ${this.token}`,
@@ -42,9 +41,6 @@ export class ProductsService {
     return this.http.delete<Product>(this.baseApiUrl + '/api/products/' + id, { headers: this.getHeaders() });
   }
 
-  // getProductsBySort(sortBy: string = 'id', sortDirection: string = 'asc'): Observable<any[]> {
-  //   return this.http.get<any[]>(`${this.baseApiUrl}/api/products/?sortBy=${sortBy}&sortDirection=${sortDirection}`);
-  // }
   getProducts(sortBy: string, sortOrder: string) {
     return this.http.get(`${this.baseApiUrl}/api/products/sorted/?sortBy=${sortBy}&sortOrder=${sortOrder}`);
   }

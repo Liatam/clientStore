@@ -10,6 +10,7 @@ import { IsAuthGuard } from './services/auth.guard';
 import { LogoutComponent } from './components/logout/logout.component';
 import { UserSettingsComponent } from './components/user-settings/user-settings.component';
 import { AdminAuthGuard } from './services/admin-auth.guard';
+import { AdminComponent } from './components/admin/admin.component';
 
 const routes: Routes = [
   // {
@@ -28,7 +29,12 @@ const routes: Routes = [
   {
     path: 'products/edit/:id',
     component: EditProductComponent,
-    canActivate: [IsAuthGuard] 
+    canActivate: [AdminAuthGuard] 
+  },
+  {
+    path:'admin',
+    component:AdminComponent,
+    canActivate:[AdminAuthGuard]
   },
   {
     path: '',

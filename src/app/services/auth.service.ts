@@ -46,9 +46,11 @@ export class AuthService {
 
   isAdmin(): Observable<boolean> {
     const userId = localStorage.getItem('userId');
+
     if (userId) {
-      return this.getUser(userId).pipe(
+      return this.getUser(userId).pipe(        
         map(user => {
+          console.log("user=========== ", user)
           return user.role === 'admin';
         }),
         catchError(error => {
@@ -60,7 +62,7 @@ export class AuthService {
       return of(false);
     }
   }
-  
+
 
   updateUser(id: string, updateUserRequest: any): Observable<any> {
     return this.http.put<User>(this.apiUrl + "/users/" + id, updateUserRequest, { headers: this.getHeaders() });

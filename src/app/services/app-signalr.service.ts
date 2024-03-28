@@ -1,40 +1,30 @@
-// import { Injectable } from '@angular/core';
-// import * as signalR from '@microsoft/signalr';
-// import { Observable } from 'rxjs';
+// app-signalr.service.ts
+import { Injectable } from '@angular/core';
+import * as signalR from '@microsoft/signalr';
 
-// @Injectable({
-//   providedIn: 'root',
-// })
-// export class AppSignalRService {
-//   private hubConnection: signalR.HubConnection;
+@Injectable({
+  providedIn: 'root',
+})
+export class AppSignalRService {
+  private hubConnection!: signalR.HubConnection;
 
-//   constructor() {
-//     this.hubConnection = new signalR.HubConnectionBuilder()
-//       .withUrl('/realtimehub') // SignalR hub URL
-//       .build();
-//   }
+  public startConnection(): void {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl('connectedUsersCount', {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets
+      })
+      .build();
 
-//   startConnection(): Observable<void> {
-//     return new Observable<void>((observer) => {
-//       this.hubConnection
-//         .start()
-//         .then(() => {
-//           console.log('Connection established with SignalR hub');
-//           observer.next();
-//           observer.complete();
-//         })
-//         .catch((error) => {
-//           console.error('Error connecting to SignalR hub:', error);
-//           observer.error(error);
-//         });
-//     });
-//   }
+    this.hubConnection
+      .start()
+      .then(() => console.log('Connection started'))
+      .catch(err => console.error('Error while starting connection: ' + err));
+  }
 
-//   getUserCount(): Observable<number> {
-//     return new Observable<number>((observer) => {
-//       this.hubConnection.on('UserCountUpdated', (count: number) => {
-//         observer.next(count);
-//       });
-//     });
-//   }
-// }
+  public addUserCountListener(action: (count: number) => void): void {
+    this.hubConnection.on('ReceiveUserCount', (count) => {
+      action(count);
+    });
+  }
+}

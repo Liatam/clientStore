@@ -9,7 +9,7 @@ import { Alert } from 'react-bootstrap';
   providedIn: 'root'
 })
 class AuthGuard {
-  constructor(private auth: AuthService, private router: Router, private toast: NgToastService) { }
+  constructor(private auth: AuthService, private router: Router) { }
   canActivate(): boolean {
     if (this.auth.isLoggedIn()) {
       return true
